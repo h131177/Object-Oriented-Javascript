@@ -1,32 +1,38 @@
-//Startcode or "spagetthi code"
-
-// create user one
-var userOneEmail = 'ryu@ninjas.com';
-var userOneName = 'Ryu';
-var userOneFriends = ['Yoshi'];
-
-// create user two
-var userTwoEmail = 'yoshi@mariocorp.com';
-var userTwoName = 'Yoshi';
-var userTwoFriends = ['Ryu', 'Mario'];
-
-// create user three
-var userThreeEmail = 'mario@mariocorp.com';
-var userThreeName = 'Mario';
-var userThreeFriends = ['Yoshi'];
-
-function login(email) {
-    console.log(email, 'is now online');
+class User {
+    constructor(email, name) {
+        this.email = email;
+        this.name = name;
+        this.score = 0;
+    }
+    login() {
+        console.log(this.email, 'just logged in');
+        return this;
+    }
+    logout() {
+        console.log(this.email, 'just logged out');
+        return this;
+    }
+    updateScore() {
+        this.score++;
+        console.log(this.email, 'score is now', this.score);
+        return this; 
+    }
 }
 
-function logout(email) {
-    console.log(email, 'has logged out');
+class Admin extends User {
+    deleteUser(user) {
+        users = users.filter(u => {
+            return u.email != user.email;
+        })
+    }
 }
 
-function logFriends(friends) {
-    friends.forEach(friend => {
-        console.log(friend);
-    });
-}
+var userOne = new User('ryu@ninjas.com', 'Ryu');
+var userTwo = new User('yoshi@mariokorp.com', 'Yoshi');
+var admin = new Admin('shaun@ninjas.com', 'shaun');
 
-login(userOneEmail);
+var users = [userOne, userTwo, admin];
+
+admin.deleteUser(userOne);
+
+console.log(users);
